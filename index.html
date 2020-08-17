@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>USDT price</title>
+    <meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+
+<pre style="font-size: 30px;">
+<div>    MAX USDT-TWD: <div id="max" style="display: inline;"></div></div>
+<div>BitoPro USDT-TWD: <div id="bitopro" style="display: inline;"></div></div>
+</pre>
+
+</body>
+<script>
+    function update_max_price() {
+        fetch('https://max-api.maicoin.com/api/v2/tickers/usdttwd')
+            .then(res => res.json())
+            .then(res => {
+                document.getElementById('max').innerText = Number(res.last).toFixed(4);
+            })
+    }
+    function update_bitopro_price() {
+        fetch('https://api.bitopro.com/v3/tickers/usdt_twd')
+            .then(res => res.json())
+            .then(({ data }) => {
+                document.getElementById('bitopro').innerText = Number(data.lastPrice).toFixed(4);
+            })
+    }
+    update_max_price();
+    update_bitopro_price();
+    setInterval(() => {
+        update_max_price();
+        update_bitopro_price();
+    }, 5000);
+</script>
+
+</html>
