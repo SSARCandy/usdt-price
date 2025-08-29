@@ -43,8 +43,8 @@
 <script>
     function update_max() {
         Promise.all([
-            fetch('https://max-api.maicoin.com/api/v2/tickers/usdttwd').then(res => res.json()),
-            fetch('https://max-api.maicoin.com/api/v2/depth?market=usdttwd&limit=1&sort_by_price=true').then(res => res.json()),
+            fetch('https://corsproxy.io/?' + encodeURIComponent('https://max-api.maicoin.com/api/v2/tickers/usdttwd')).then(res => res.json()),
+            fetch('https://corsproxy.io/?' + encodeURIComponent('https://max-api.maicoin.com/api/v2/depth?market=usdttwd&limit=1&sort_by_price=true')).then(res => res.json()),
         ])
         .then(data => {
             document.getElementById('max').innerText = Number(data[0].last).toFixed(4);
