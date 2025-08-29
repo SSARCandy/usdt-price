@@ -22,10 +22,10 @@
             Ask1: <div id="bitopro-ask1" style="display: inline;"></div>
             Bid1: <div id="bitopro-bid1" style="display: inline;"></div>
 </div>
-<div>    MAX USDT-TWD: <div id="max" style="display: inline;"></div>
+<!-- <div>    MAX USDT-TWD: <div id="max" style="display: inline;"></div>
             Ask1: <div id="max-ask1" style="display: inline;"></div>
             Bid1: <div id="max-bid1" style="display: inline;"></div>
-</div>
+</div> -->
 </pre>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -41,17 +41,17 @@
 </script>
 </body>
 <script>
-    function update_max() {
-        Promise.all([
-            fetch('https://corsproxy.io/?' + encodeURIComponent('https://max-api.maicoin.com/api/v2/tickers/usdttwd')).then(res => res.json()),
-            fetch('https://corsproxy.io/?' + encodeURIComponent('https://max-api.maicoin.com/api/v2/depth?market=usdttwd&limit=1&sort_by_price=true')).then(res => res.json()),
-        ])
-        .then(data => {
-            document.getElementById('max').innerText = Number(data[0].last).toFixed(4);
-            document.getElementById('max-ask1').innerText = `${Number(data[1].asks[0][0]).toFixed(4)}x${Number(data[1].asks[0][1]).toFixed(0)}`;
-            document.getElementById('max-bid1').innerText = `${Number(data[1].bids[0][0]).toFixed(4)}x${Number(data[1].bids[0][1]).toFixed(0)}`;
-        })
-    }
+    // function update_max() {
+    //     Promise.all([
+    //         fetch('https://corsproxy.io/url?' + encodeURIComponent('https://max-api.maicoin.com/api/v2/tickers/usdttwd')).then(res => res.json()),
+    //         fetch('https://corsproxy.io/url?' + encodeURIComponent('https://max-api.maicoin.com/api/v2/depth?market=usdttwd&limit=1&sort_by_price=true')).then(res => res.json()),
+    //     ])
+    //     .then(data => {
+    //         document.getElementById('max').innerText = Number(data[0].last).toFixed(4);
+    //         document.getElementById('max-ask1').innerText = `${Number(data[1].asks[0][0]).toFixed(4)}x${Number(data[1].asks[0][1]).toFixed(0)}`;
+    //         document.getElementById('max-bid1').innerText = `${Number(data[1].bids[0][0]).toFixed(4)}x${Number(data[1].bids[0][1]).toFixed(0)}`;
+    //     })
+    // }
     function update_bitopro() {
         Promise.all([
             fetch('https://api.bitopro.com/v3/tickers/usdt_twd').then(res => res.json()),
@@ -63,10 +63,10 @@
             document.getElementById('bitopro-bid1').innerText = `${Number(data[1].bids[0].price).toFixed(4)}x${Number(data[1].bids[0].amount).toFixed(0)}`;
         })
     }
-    update_max();
+    // update_max();
     update_bitopro();
     setInterval(() => {
-        update_max();
+        // update_max();
         update_bitopro();
     }, 5000);
 </script>
